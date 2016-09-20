@@ -26,6 +26,6 @@ export function setUserInfo(data) {
         type: 'SET_USER_INFO',
         playload: data,
         recieveAt: Date.now()
-    }
+    };
 
 }

@@ -13,7 +13,7 @@ module.exports = function(param) {
 		// ВЫКЛЮЧИЛ ПОКА НЕ ЗНАЮ ЧТО ДЕЛАТЬ context: `${param._path}/${param.ENV}`,
 
 		output: {
-			path: `${param._path}/web/public/js`,
+			path: `${param._path}/web/public/scripts`,
 		},
 
 		// Включаем режим отладки у лоадеров (loaders)

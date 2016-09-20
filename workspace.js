@@ -10,7 +10,7 @@ app.set('port', process.env.PORT || 3000);
 app.listen(app.get('port'), () => console.log(`Server runing in port ${app.get('port')}`));
 
 // Прокидываем static
-app.use(express.static(__dirname + '/web/public'));
+app.use(express.static(__dirname + '/web'));
 
 // Routing
 app.get('/', (req, res) => {

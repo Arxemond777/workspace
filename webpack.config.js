@@ -31,7 +31,7 @@ var setConfigObj = function(_rootPath) {
 	// Заполняем массив:
 
 		// global по-умолчанию
-		configList.push('global');
+		configList.push('index');
 
 		// и кастомный, в зависимости от окружения
 		configList.push(ENV);
@@ -41,8 +41,8 @@ var setConfigObj = function(_rootPath) {
 
 		// Подключаем конфиг
 		// и инициализируем
-		config[item] = require(`${_rootPath}/app/config/${item}`)({
-			_path: __dirname,
+		config[item] = require(`${_rootPath}/app/configs/webpack/${item}`)({
+			_path: _rootPath,
 			ENV: ENV
 		});
 
@@ -67,7 +67,7 @@ var getConfig = function(env) {
 
 	// Соединяем конфиги, используя lodash метод
 	// и функцию, объединяющую массивы
-	return _.mergeWith(configMap[env], configMap['global'], function(objValue, srcValue) {
+	return _.mergeWith(configMap[env], configMap['index'], function(objValue, srcValue) {
 
 		if (_.isArray(objValue)) {
 			return objValue.concat(srcValue);

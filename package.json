@@ -4,7 +4,7 @@
   "description": "Workspace for rg.ru team",
   "main": "workspace.js",
   "scripts": {
-    "start": "node workspace.js",
+    "server": "node workspace.js",
     "dev": "NODE_ENV=dev webpack --progress",
     "prod": "NODE_ENV=prod webpack --progress"
   },

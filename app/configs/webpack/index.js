@@ -10,7 +10,7 @@ module.exports = function(param) {
 		// Внимание, если файл является точкой входа (entry),
 		// то он не может подключаться внутри другого модуля
 		entry: {
-			app: ['babel-polyfill', `${param._path}/app/scripts/app`],
+			app: ['babel-polyfill', `${param._path}/app/resource/scripts/index`],
 		},
 
 		// Куда его будем выводить
