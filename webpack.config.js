@@ -10,75 +10,61 @@
 // ОБъявляем webpack для плагина
 var webpack = require('webpack');
 
-// Подключаем lodash как инструментарий
-var _ = require('lodash');
-
-// Переменная окружения
-var ENV = process.env.NODE_ENV || 'dev';
+// Модуль работы с дирректориями
+var fs = require('fs');
 
 // Автосборка объекта конфигов
 // Принимает корневой путь
 // На выходе получаем объект с подключенными конфигами
-var setConfigObj = function(_rootPath) {
+var getConfig = function(_rootPath) {
 
 	var
-		// Будущий конфиг
-		config = {},
 
 		// Массив конфигов
-		configList = [];
+		configList = [],
 
-	// Заполняем массив:
+		// Путь до бандлов
+		bundlePath = `${_rootPath}/src/bundles/`,
 
-		// global по-умолчанию
-		configList.push('index');
+		// Переменная окружения
+		ENV = process.env.NODE_ENV || 'dev';
 
-		// и кастомный, в зависимости от окружения
-		configList.push(ENV);
-
-	// Генерируем конфиг
-	configList.forEach(function(item){
-
-		// Подключаем конфиг
-		// и инициализируем
-		config[item] = require(`${_rootPath}/app/configs/webpack/${item}`)({
+	// Помещаем глобальный конфиг
+	configList.push(require(`${_rootPath}/app/configs/webpack/index.js`)({
 			_path: _rootPath,
 			ENV: ENV
-		});
+		}));
 
-	});
+	// Считываем папку с бандлами
+	fs.readdirSync(bundlePath).forEach(function(item) {
 
-	return config;
+		var configPath = `${bundlePath}${item}/configs/webpack/index.js`;
 
-};
+		// Если это папка, то ищем конфиг
+		if (fs.lstatSync(`${bundlePath}${item}`).isDirectory()) {
 
-// ОБъект с настройками
-var configMap = setConfigObj(__dirname);
+			// Если существует конфиг
+			try {
 
-// Получаем настройки
-// Собираются как вызовы функциий
-var getConfig = function(env) {
+				fs.lstatSync(configPath);
 
-	// Если Объект с настройками не собрался
-	// выдаем ошибку
-	if (!configMap) {
-		throw 'configMap is not created';
-	}
+				configList.push(require(configPath)({
+					_path: _rootPath,
+					ENV: ENV
+				}));
 
-	// Соединяем конфиги, используя lodash метод
-	// и функцию, объединяющую массивы
-	return _.mergeWith(configMap[env], configMap['index'], function(objValue, srcValue) {
+			} catch (err) {}
 
-		if (_.isArray(objValue)) {
-			return objValue.concat(srcValue);
 		}
 
 	});
 
+	// Для проверки конфига, пишем в файл
+	//fs.writeFileSync(__dirname + '/config.js', JSON.stringify(configList, null, '\t'));
+
+	return configList;
+
 };
 
-// Получаем готовый конфиг
-var config = getConfig(ENV);
-
 // Экспортируем Конфиг в webpack
-module.exports = config;
+module.exports = getConfig(__dirname);
