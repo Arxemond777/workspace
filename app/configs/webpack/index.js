@@ -15,7 +15,7 @@ module.exports = function(param) {
 
 		// Куда его будем выводить
 		output: {
-			//path: './js',
+			path: `${param._path}/web/public/scripts`,
 
 			// На выходе указываем, что в путях внутри файлов
 			// будет подставляться publicPath
@@ -29,6 +29,24 @@ module.exports = function(param) {
 			// с именем, соответствующим имени в entry
 			filename: '[name].js'
 		},
+
+		// Включаем режим отладки у лоадеров (loaders)
+		debug: true,
+
+		// Включаю вотчер файлов watch: true
+		watch: true,
+
+		// Настройки вотчера файлов
+		watchOptions: {
+
+			// Задержка перед тем, как пересобрать файлы
+			// По-умолчанию 300ms
+			aggregateTimeout: 100
+		},
+
+		// Инструменты разработчика
+		// source-maps типа eval, это самые быстрые
+		devtool: 'eval',
 
 		// Плагины
 		// Подключается на разных стадиях компиляции
@@ -92,6 +110,16 @@ module.exports = function(param) {
 
 		// Модули для сборки
 		module: {
+
+			preLoaders: [
+
+				// es-lint конфигурация в файле .eslintrc
+				{
+					test: /\.js$/,
+			        exclude: /node_modules/,
+			        loader: 'eslint-loader'
+			    }
+			],
 
 			// В лоадерах тоже используются модули-лоадеры
 			// Лоадер - трансформатор, получает исходный код и возвращает,
