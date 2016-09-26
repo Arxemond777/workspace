@@ -28,10 +28,19 @@
     "webpack-hot-middleware": "^2.12.2"
   },
   "dependencies": {
+    "body-parser": "^1.15.2",
+    "cookie-parser": "^1.4.3",
+    "exec": "^0.2.1",
+    "express-session": "^1.14.1",
+    "formidable": "^1.0.17",
+    "host": "0.0.1",
     "react": "^15.3.0",
     "react-dom": "^15.3.0",
     "react-redux": "^4.4.5",
     "redux": "^3.5.2",
-    "redux-logger": "^2.6.1"
+    "redux-logger": "^2.6.1",
+    "sprintf-js": "^1.0.3",
+    "underscore": "^1.8.3",
+    "vhost": "^3.0.2"
   }
 }
