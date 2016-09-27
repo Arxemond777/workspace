@@ -1,0 +1,9 @@
+services:
+  global.customException:
+    location: app/services/customExceptionService.js
+    #parametrs: ['exception', 'message', 'code' : null]
+  global.mail:
+    location: app/services/mailService.js
+  #global.test:
+  #  location1: app/configs/services/customExceptionService1.js
+  #  parametrs: ['a']

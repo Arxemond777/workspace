@@ -1,4 +1,5 @@
 module.exports = function(applicationInit) {
+    
     var customException = require(global.siteRootApp + 'services/customExceptionService.js');
 
     customException(!applicationInit.api, 'Пробросьте поддомен api');

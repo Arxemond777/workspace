@@ -1,18 +1,113 @@
-var fs = require('fs');
+var
+    fs = require('fs'),
+    yaml = require('js-yaml');
 
 module.exports = function () {
-    var allGlobalService = fs.readdirSync(global.siteRootServices);
+    
+    var serviceContainer = function() {
 
-    serviceContainer = {};
+        var
+            instance = null,
+            registryService = {};
 
-    allGlobalService.forEach(function(val){
-        //glob
-        //смотрим, что строка и соответствует someNameService.js и не текущий файл (serviceContainerService.js)
-        if (typeof val == 'string' && val.match(/[a-zA-z0-9]Service\.js/) && (/serviceContainerService\.js/).exec(__filename)[0] != val) {
-            //if (__filename == global.siteRootServices + val) continue;
-            serviceContainer['global.' + ((/^.*(?=Service)/).exec(val))[0]] = require(global.siteRootServices + val);
-            //console.log(serviceContainer);
+
+        this.set = function () {
+
+            /**
+             * читаем yml конфиг сервиса
+             */
+            var
+                doc = yaml.safeLoad(fs.readFileSync(global.siteRootConfigsBack + 'services.yml', 'utf8')),
+                services = doc.services;
+
+            if (!doc) {
+
+                throw new Error('Ошибка чтения данных');
+
+            } else {
+
+                for (let serviceName in services) {
+
+                    if (typeof(serviceName) !== 'string') {
+
+                        throw new Error('Имя сервиса должно быть строкой');
+
+                    } else if (registryService.hasOwnProperty(serviceName)) {
+
+                        throw new Error('Сервис с заданным именим уже зарезирвирован');
+
+                    } else if (Object.prototype.toString.call(services[serviceName]) !== '[object Object]') {
+
+                        throw new Error('Значение сервиса должно быть объектом');
+
+                    } else {//если прошли все проверки то регистрируем наш сервис
+
+                        if (!services[serviceName]['location']) {
+
+                            throw new Error('Не верно сконфигурирован файл. Отстутствует обязательный параметр location');
+
+                        } else if (!(services[serviceName]['location']).match(/.Service\.js$/)) {
+
+                            console.log(services[serviceName]['location']);
+                            throw new Error('Не верное имя файла сервиса. Должно быть так "/exampleService.js"');
+
+                        } else if (!fs.existsSync(global.siteRoot + services[serviceName]['location'])) {
+
+                            throw new Error('Не найден путь для сервиса ' + global.siteRoot + services[serviceName]['location']);
+
+                        } else {
+
+                            if (services[serviceName]['parametrs']) {//если есть параметры
+
+                                //console.log(services[serviceName]['parametrs']);
+                                registryService[serviceName] = require(global.siteRoot + services[serviceName]['location'])(services[serviceName]['parametrs']);
+
+                            } else {
+
+                                registryService[serviceName] = require(global.siteRoot + services[serviceName]['location']);
+
+                            }
+                        }
+                    }
+                }
+            }
+
+        }();
+
+        if (!instance) {
+
+            instance = {
+                get: function (serviceName) {
+
+                    if (!serviceName) {
+
+                        throw new Error('Не корректное имя');
+
+                    } else if (!registryService.hasOwnProperty(serviceName)) {
+
+                        throw new Error('Запрошенный сервис не найден');
+
+                    } else {
+
+                        return registryService[serviceName];
+
+                    }
+                },
+                list: function () {
+
+                    return global._.keys(registryService);
+
+                }
+            };
+
         }
-        console.log(serviceContainer);
-    });
-};
+
+        return instance;
+
+
+    };
+
+    return new serviceContainer();
+
+        //serviceContainer.get('global.customException')(1, 'a');
+}();
