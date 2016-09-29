@@ -4,6 +4,9 @@ services:
     #parametrs: ['exception', 'message', 'code' : null]
   global.mail:
     location: app/services/mailService.js
+  global.smtpConnect:
+    location: app/services/smtpConnectService.js
+    parametrs: ['userEmailSander', 'password', 'host', 'port']
   #global.test:
   #  location1: app/configs/services/customExceptionService1.js
   #  parametrs: ['a']

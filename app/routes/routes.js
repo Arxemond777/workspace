@@ -1,7 +1,8 @@
 module.exports = function(applicationInit) {
     
     var pathBundle = [ //Название бандла должно совпадать с названием роута в нем. Example /workspace/src/someBundle/routes/someBundle.js
-            'exampleAdmin'
+            'exampleAdmin',
+            //'Auth'
         ],
         configData = configData || {},
         fs = require('fs'),

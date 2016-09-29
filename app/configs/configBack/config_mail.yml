@@ -1,3 +1,9 @@
-user.email:
-  name: 1arxemond1@gmail.com
-  password: 123
+user.account:
+  name: '1arxemond1@gmail.com'
+  password: '1'
+  host: 'aspmx.l.google.com'
+  port: 25
+
+user.info:
+  from: '<1arxemond1@gmail.com>'
+  #from: '"WORKSPACE" <no-reply@rg.ru>'

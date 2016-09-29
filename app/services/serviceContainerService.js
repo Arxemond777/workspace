@@ -3,7 +3,7 @@ var
     yaml = require('js-yaml');
 
 module.exports = function () {
-    
+
     var serviceContainer = function() {
 
         var
@@ -57,16 +57,13 @@ module.exports = function () {
 
                         } else {
 
-                            if (services[serviceName]['parametrs']) {//если есть параметры
-
-                                //console.log(services[serviceName]['parametrs']);
-                                registryService[serviceName] = require(global.siteRoot + services[serviceName]['location'])(services[serviceName]['parametrs']);
-
-                            } else {
-
-                                registryService[serviceName] = require(global.siteRoot + services[serviceName]['location']);
+                            if (services[serviceName]['parametrs']) { //Если есть параметры
+                                //console.log(`Для сервиса ${serviceName} необходимы следующие параметры (${services[serviceName]['parametrs']})`);
+                                //registryService[serviceName] = require(global.siteRoot + services[serviceName]['location'])/*(services[serviceName]['parametrs'])*/;
 
                             }
+                            
+                            registryService[serviceName] = require(global.siteRoot + services[serviceName]['location']);
                         }
                     }
                 }
