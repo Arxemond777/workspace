@@ -38,12 +38,9 @@ jspm_packages
 
 # OS generated files #
 .DS_Store
-<<<<<<< HEAD
 .DS_Store?
-=======
-.DS_Store?
+.idea/*
 
 # Ignore builded files without html
-web/public/
+#web/public/
 !web/public/html/
->>>>>>> builder

@@ -8,31 +8,33 @@ app.use(require('cookie-parser')(secretCookiePassword.secretCookiePassword));
 
 module.exports = {
     checkValidCookieAndSession:
-        (request, responce, next) => {
-            console.log(`Выолнем ${request.url} ...`);
+        (request, response, next) => {
+            console.log(`Preform ${request.url} ...`);
 
             var name_login = '/login';
 
-            if (request.url != name_login) { //Если не на login
+            if (request.url !== name_login) { //Если не на login
 
                 app.locals.referrerLogin = request.url; //Пишим текущий url
-                global.referrer = app.locals.referrerLogin;
+                global.referrer = app.locals.referrerLogin; //TODO подумать, как лучше
 
                 if (!request.signedCookies.login) { //Нет куки
 
-                    responce.redirect(303, name_login);
+                    response.redirect(303, name_login);
+
+                } else {
+
+                    next();
 
                 }
 
-                next();
+            }  else if (request.url === name_login) { //Если мы на аутx
 
-            }  else if (request.url == name_login) { //Если мы на аутx
-
-                var redirectReferrer = ((app.locals.referrerLogin && app.locals.referrerLogin != name_login) ? app.locals.referrerLogin : '/');
+                var redirectReferrer = ((app.locals.referrerLogin && app.locals.referrerLogin !== name_login) ? app.locals.referrerLogin : '/');
 
                 if (!request.signedCookies.login) { //Нет куки
 
-                    responce
+                    response
                         .cookie(
                             'login',
                             123,
@@ -43,19 +45,18 @@ module.exports = {
                                 //secure: true, //https only
                             }
                         )
-                        .redirect(303, redirectReferrer)
-                    ;
+                        .redirect(303, redirectReferrer);
 
-                    //next();
                 } else { //Есть кука
-                    responce
-                        .redirect(303, redirectReferrer)
+
+                    response
+                        .redirect(303, redirectReferrer);
                 }
 
             } else {
-                console.log(3);
 
                 next();
+
             }
         }
 }
