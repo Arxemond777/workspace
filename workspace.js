@@ -44,6 +44,17 @@ var
 app.set('port', process.env.PORT || 3000);
 app.listen(app.get('port'), () => console.log(`Server runing in port ${app.get('port')}`));
 
+app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+});
+
+api.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+});
 
 app.use(express.static(__dirname + '/web')); // Прокидываем static
 

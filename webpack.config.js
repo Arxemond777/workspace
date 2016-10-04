@@ -36,7 +36,8 @@ var getConfig = function(_rootPath) {
 		}));
 
 	// Считываем папку с бандлами
-	fs.readdirSync(bundlePath).forEach(function(item) {
+	// ПОКА ВЫКЛЮЧИЛИ, ТК ВСЕ РАБОТАЕТ ЧЕРЕЗ ГЛАВНЫЙ БАНДЛ
+	/* fs.readdirSync(bundlePath).forEach(function(item) {
 
 		var configPath = `${bundlePath}${item}/configs/webpack/index.js`;
 
@@ -57,7 +58,7 @@ var getConfig = function(_rootPath) {
 
 		}
 
-	});
+	});*/
 
 	// Для проверки конфига, пишем в файл
 	//fs.writeFileSync(__dirname + '/config.js', JSON.stringify(configList, null, '\t'));

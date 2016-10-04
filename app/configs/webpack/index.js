@@ -19,7 +19,7 @@ module.exports = function(param) {
 
 			// На выходе указываем, что в путях внутри файлов
 			// будет подставляться publicPath
-			publicPath: '/',
+			publicPath: '/public/scripts/',
 
 			// Объявляем глобальную переменную (в модуле она указана через exports)
 			//library: 'app',
@@ -70,12 +70,13 @@ module.exports = function(param) {
 			// 	'NODE_ENV'
 			// ]),
 
+			// ВЫКЛЮЧИЛИ, Т.К ИСПОЛЬЗУЕМ EQUIRE.ENSURE
 			// Плагин ищет в модулях (entry) одинаковые вызовы кода
 			// и собирает их в один файл, который является чем-то вроде библиотеки
-			new webpack.optimize.CommonsChunkPlugin({
+			//new webpack.optimize.CommonsChunkPlugin({
 
 				// Имя куска сборки
-				name: 'lib'
+				//name: 'lib'
 
 				// Имя файла, куска сборки
 				// filename: libChunks
@@ -87,7 +88,7 @@ module.exports = function(param) {
 				// Кроме цифр можно указать функцию, которая решит,
 				// передавать в кусок часть кода или нет
 				// minChunks: NUMBER
-			})
+			//})
 
 		],
 
