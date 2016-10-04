@@ -1,5 +1,5 @@
 /**
- * если передаем объект, то expression = {проверка: сообщение}, а message пустой
+ * если передаем объект, то expression = {сообщение: проверка}, а message пустой
  */
 
 module.exports = (expression, message, code = null) => {
@@ -33,14 +33,15 @@ function stringException(expression, message, code = null) { // Если пер�
 function objectException(expression, code = null) { // Если передан объект
     if (code != null || code != undefined) {
 
-        code = '. Код ошибки:' + code;
+        code = `. Код ошибки: ${code}`;
     } else {
 
         code = '';
     }
 
     for (var val in expression) {
-        if (val) throw new Error(expression[val] + code); //TODO может работать не корректно
+        //if (val) throw new Error(expression[val] + code); //TODO может работать не корректно
+        if (expression[val]) throw new Error(val + code); //TODO может работать не корректно
     }
 }
 

@@ -19,6 +19,7 @@ var
     pathToGlobalFileRoutes = global.siteRootApp + '/routes/routes.js',
     service = require(global.serviceContainer); // Путь до глобальных файлов
 
+//console.log(service.get('global.connectBD')(/*'test'*/));
 //console.log(service.get('global.mail')('1arxemond1@gmail.com', 'subject lalalala', '<div>123</div>'));
 /**
  * Node компоненты

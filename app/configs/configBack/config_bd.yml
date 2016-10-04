@@ -1,0 +1,16 @@
+default_bd_name: workspace
+list_bd:
+  workspace:
+    host: 127.0.0.1
+    port: 5432
+    user: urijglusenkov
+    pass: 123
+    database: workspace
+    type: postgres
+  test:
+      host: 12111
+      port: 5432
+      user: 213
+      pass: 123
+      database: test
+      type: postgres
