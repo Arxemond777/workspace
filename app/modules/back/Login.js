@@ -20,7 +20,7 @@ module.exports = {
 
                 if (!request.signedCookies.login) { //Нет куки
 
-                    response.redirect(303, name_login);
+                    //response.redirect(303, name_login);
 
                 } else {
 
@@ -28,7 +28,7 @@ module.exports = {
 
                 }
 
-            }  else if (request.url === name_login) { //Если мы на аутx
+            }  else if (request.url === name_login) { //Если мы на login
 
                 var redirectReferrer = ((app.locals.referrerLogin && app.locals.referrerLogin !== name_login) ? app.locals.referrerLogin : '/');
 
@@ -44,13 +44,12 @@ module.exports = {
                                 maxAge: ((((60*1000)*60)*24)*7), //Expirece 7 day
                                 //secure: true, //https only
                             }
-                        )
-                        .redirect(303, redirectReferrer);
+                        );
+                        //.redirect(303, redirectReferrer);
 
                 } else { //Есть кука
 
-                    response
-                        .redirect(303, redirectReferrer);
+                    //response.redirect(303, redirectReferrer);
                 }
 
             } else {

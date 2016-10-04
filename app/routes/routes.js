@@ -1,8 +1,9 @@
 module.exports = function(applicationInit) {
     
     var pathBundle = [ //Название бандла должно совпадать с названием роута в нем. Example /workspace/src/someBundle/routes/someBundle.js
-            'exampleAdmin',
-            //'Auth'
+            'Users',
+            'Auth',
+            'Login'
         ],
         configData = configData || {},
         fs = require('fs'),
@@ -12,8 +13,8 @@ module.exports = function(applicationInit) {
 
     pathBundle.forEach(function (val) {
         var
-            pathForRequireBundle = sprintf(global.siteRootBundles, val)//путь до бандла
-            ,pathForRequireBundleRoutes = sprintf(global.siteRootBundlesRoutes, val);//путь до роута
+            pathForRequireBundle = sprintf(global.siteRootBundles, val),//путь до бандла
+            pathForRequireBundleRoutes = sprintf(global.siteRootBundlesRoutes, val);//путь до роута
 
         service.get('global.customException')(
             [
@@ -31,9 +32,7 @@ module.exports = function(applicationInit) {
          */
 
         service.get('global.customException')(configData.hasOwnProperty(val), 'Роут уже присутствует');
-        configData[val] = require(pathForRequireBundleRoutes)(applicationInit);
+        configData[val] = require(pathForRequireBundleRoutes)(applicationInit, val);
     });
     
-    //console.log(configData.exampleAdmin);
-    //return 123;
 };

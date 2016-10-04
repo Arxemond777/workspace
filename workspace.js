@@ -51,7 +51,7 @@ app.use(require('cookie-parser')(secretCookiePassword.secretCookiePassword));
 
 /** Авторизация */
 var login = require(`${global.siteRootModulesBack}Login.js`);
-app.use(login.checkValidCookieAndSession);
+//app.use(login.checkValidCookieAndSession);
 //app.set('view', `${global.siteRoot}public/html/index.handlebars`);
 
 /** Хенделбарс */

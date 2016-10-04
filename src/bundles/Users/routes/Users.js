@@ -1,4 +1,4 @@
-module.exports = function(applicationInit) {
+module.exports = function(applicationInit, routeBundle) {
     
     var customException = require(global.siteRootApp + 'services/customExceptionService.js');
 
@@ -6,7 +6,7 @@ module.exports = function(applicationInit) {
 
     api = applicationInit.api;
 
-    api.get('/a', (request, response) => {
+    api.get(`/${routeBundle}/`, (request, response) => {
         response.json({1: 123});
     });
     
