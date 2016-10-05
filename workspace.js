@@ -44,11 +44,11 @@ var
 app.set('port', process.env.PORT || 3000);
 app.listen(app.get('port'), () => console.log(`Server runing in port ${app.get('port')}`));
 
-app.use(function(req, res, next) {
+/*app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     next();
-});
+});*/
 
 api.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
@@ -74,7 +74,7 @@ app.set('view engine', 'handlebars');
 app.set('views', `${global.siteRoot}web/public/html/`);
 
 /** Парсер Post */
-app.use(require('body-parser').urlencoded({ extended: true }));
+//app.use(require('body-parser').urlencoded({ extended: true }));
 
 /**  Промежуточное ПО для проверки аунтетификации и ролей для поддомена api */
 
@@ -82,7 +82,20 @@ app.use(require('body-parser').urlencoded({ extended: true }));
 app.use(vhost('api.*', api));
 
 /** Routing */
-app.get('/*', (request, response) => {
+app.route(`/*`)
+    .get((request, response) => {
+        var data = {};
+
+        data.data = JSON.stringify({data: {2: {3: 5, 4: htmlencode.htmlEncode(global.referrer)}}});
+
+        //console.log(data);
+        response.render('index', data);
+    });
+    /*.post((request, response) => {
+        response.json({1: 'insert data login'});
+    });*/
+
+/*app.get('/!*', (request, response) => {
 
     //response.sendFile(global.siteRoot + '/web/public/html/index.html');
     var data = {};
@@ -92,7 +105,7 @@ app.get('/*', (request, response) => {
     console.log(data);
     response.render('index', data);
 
-});
+});*/
 
 
 api.get('/', (request, response) => {

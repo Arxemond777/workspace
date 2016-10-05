@@ -5,10 +5,7 @@ module.exports = function(applicationInit, routeBundle) {
     customException(!applicationInit.api, 'Пробросьте поддомен api');
 
     api = applicationInit.api;
-
-    /*api.get(`/${routeBundle}/`, (request, response) => {
-        response.json({1: 123});
-    });*/
+    
 
     api.route(`/${routeBundle}`)
         .get((request, response) => {

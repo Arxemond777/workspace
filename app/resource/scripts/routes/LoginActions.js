@@ -10,7 +10,7 @@ export function login() {
         });
 
         axios
-            .get('//api.127.0.0.1:3000/login')
+            .post('//api.localhost:3000/login')
             .then((res) => {
 
                 console.log(res);
@@ -46,7 +46,7 @@ export function addUser() {
         });
 
         axios
-            .get('//api.127.0.0.1:3000/auth/addUsers')
+            .post('//api.localhost:3000/auth/addUser', JSON.stringify({data: { aaa: {2: 3}}}))
             .then((res) => {
 
                 console.log(res);

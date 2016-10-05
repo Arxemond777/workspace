@@ -13,7 +13,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as LoginActions from './LoginActions';
 
-class LoginRoute extends Component {
+class AuthAddUser extends Component {
 
     static propTypes = {
         loginActions: PropTypes.object,
@@ -24,25 +24,37 @@ class LoginRoute extends Component {
 
         return (
             <div>
-                <h2>Форма чтобы зайти</h2>
 
-                <div className="field">
-                    <label>Логин: </label>
-                    <input type="text" name="login" />
-                </div>
 
-                <div className="field">
-                    <label>Пароль: </label>
-                    <input type="text" name="pass" />
-                </div>
+        <h2>Форма регистрации</h2>
 
-                <div className="field">
-                    <button onClick={this.props.loginActions.login}>Отправить</button>
-                </div>
-
-                <h3>Статус запроса: {this.props.login.fetching.toString()}</h3>
+        <div className="field">
+            <label>email: </label>
+        <input type="text" name="email" />
             </div>
-        );
+
+            <div className="field">
+            <label>Имя: </label>
+        <input type="text" name="f_name" />
+            </div>
+
+            <div className="field">
+            <label>Фамилия: </label>
+        <input type="text" name="s_name" />
+            </div>
+
+            <div className="field">
+            <label>Пароль: </label>
+        <input type="text" name="pass" />
+            </div>
+
+            <div className="field">
+            <button onClick={this.props.loginActions.addUser}>Отправить</button>
+        </div>
+
+        <h3>Статус запроса: {this.props.login.fetching.toString()}</h3>
+        </div>
+    );
 
     }
 
@@ -69,4 +81,4 @@ const
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(LoginRoute);
+)(AuthAddUser);

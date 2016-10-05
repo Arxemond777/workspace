@@ -23,7 +23,8 @@ class App extends Component {
                 <div className="header" style={style}>
                     Шапка | Меню:
                     <Link to="/" onlyActiveOnIndex={true} activeClassName="active">Главная</Link> |&nbsp;
-                    <Link to="login" activeClassName="active">Логин</Link> |&nbsp;
+                    <Link to="/login" activeClassName="active">Логин</Link> |&nbsp;
+                    <Link to="/auth/addUser" activeClassName="active">Регистрация</Link> |&nbsp;
                     <Link to="asdasd" activeClassName="active">Пример 404</Link>
                 </div>
                 <div className="content" style={{...style, borderColor: 'green'}}>
