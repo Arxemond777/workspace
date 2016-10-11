@@ -42,5 +42,5 @@ jspm_packages
 .idea/*
 
 # Ignore builded files without html
-#web/public/
+web/public/
 !web/public/html/
