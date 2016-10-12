@@ -1,19 +1,10 @@
 import React, { Component, PropTypes } from 'react';
 
-/**
- * ЭТО ВСЕ УЙДЕТ В БАНДЛ ЛОГИНА
- *
- * //api.host:3000/login - Логин
- *
- * //api.host:3000/auth/addUsers - Добавить пользователя
- *
- */
-
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as LoginActions from './LoginActions';
 
-class LoginRoute extends Component {
+class LoginComp extends Component {
 
     static propTypes = {
         loginActions: PropTypes.object,
@@ -24,7 +15,7 @@ class LoginRoute extends Component {
 
         return (
             <div>
-                <h2>Форма чтобы зайти</h2>
+                <h2>Форма чтобы зайти. Юзер: {this.props.login.user}</h2>
 
                 <div className="field">
                     <label>Логин: </label>
@@ -69,4 +60,4 @@ const
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(LoginRoute);
+)(LoginComp);

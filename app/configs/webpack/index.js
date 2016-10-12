@@ -117,7 +117,11 @@ module.exports = function(param) {
 				// es-lint конфигурация в файле .eslintrc
 				{
 					test: /\.js$/,
-			        exclude: /node_modules/,
+					include: [
+			        	`${param._path}/app/resource/scripts/`,
+			        	`${param._path}/src/bundles/*/resource/scripts/`
+			        ],
+			        //exclude: /node_modules/,
 			        loader: 'eslint-loader'
 			    }
 			],
