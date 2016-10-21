@@ -56,14 +56,9 @@ module.exports = function () {
                             throw new Error('Не найден путь для сервиса ' + global.siteRoot + services[serviceName]['location']);
 
                         } else {
-
-                            if (services[serviceName]['parametrs']) { //Если есть параметры
-                                //console.log(`Для сервиса ${serviceName} необходимы следующие параметры (${services[serviceName]['parametrs']})`);
-                                //registryService[serviceName] = require(global.siteRoot + services[serviceName]['location'])/*(services[serviceName]['parametrs'])*/;
-
-                            }
                             
                             registryService[serviceName] = require(global.siteRoot + services[serviceName]['location']);
+                            
                         }
                     }
                 }
@@ -74,6 +69,7 @@ module.exports = function () {
         if (!instance) {
 
             instance = {
+                
                 get: function (serviceName) {
 
                     if (!serviceName) {
@@ -106,5 +102,4 @@ module.exports = function () {
 
     return new serviceContainer();
 
-        //serviceContainer.get('global.customException')(1, 'a');
 }();
