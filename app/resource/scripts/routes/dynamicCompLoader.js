@@ -6,9 +6,6 @@ import { injectAsyncReducer } from '../store/configureStore';
 export function loadComp(param) {
 
     let
-
-        CompPath = param.comp,
-        CompReducerPath = param.reducers,
         CompName = param.name,
         CompBundleName = param.bundleName;
 
@@ -22,8 +19,8 @@ export function loadComp(param) {
 
             require.ensure([], () => {
 
-                let Comp = require(`../../../../src/bundles/${CompBundleName}/resource/scripts/${CompPath}`).default,
-                    CompReducer = require(`../../../../src/bundles/${CompBundleName}/resource/scripts/${CompReducerPath}`).default;
+                let Comp = require(`../../../../src/bundles/${CompBundleName}/resource/scripts/${CompBundleName}`).default,
+                    CompReducer = require(`../../../../src/bundles/${CompBundleName}/resource/scripts/reducers`).default;
 
                 injectAsyncReducer(CompName, CompReducer);
 

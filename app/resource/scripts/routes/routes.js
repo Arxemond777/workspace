@@ -13,9 +13,7 @@ export const routes = (
 
             callback(null, loadComp({
                 name: 'login',
-                bundleName: 'Login',
-                comp: 'LoginComp',
-                reducers: 'LoginReducer'
+                bundleName: 'Login'
             }));
 
         }} />
@@ -24,9 +22,7 @@ export const routes = (
 
             callback(null, loadComp({
                 name: 'auth',
-                bundleName: 'Auth',
-                comp: 'AuthComp',
-                reducers: 'AuthReducer'
+                bundleName: 'Auth'
             }));
 
         }} />

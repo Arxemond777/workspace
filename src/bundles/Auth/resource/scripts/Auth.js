@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as AuthActions from './AuthActions';
 
-class AuthComp extends Component {
+class Auth extends Component {
 
     static propTypes = {
         authActions: PropTypes.object,
@@ -55,4 +55,4 @@ const
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(AuthComp);
+)(Auth);
