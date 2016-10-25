@@ -1,4 +1,6 @@
-var roleModel = require('../models/roleModels.js');
+var
+    roleModel = require('../models/roleModels.js'),
+    mainController = require(global.siteRootMainController)();
 
 /**
  * 
@@ -8,20 +10,25 @@ var roleModel = require('../models/roleModels.js');
 
 module.exports = function(options) {
     
-    return {
-        
-        getAll: function () {
+    var roleController =
+        {
 
-                return roleModel.getAll;
-            
-        },
-        
-        getById: function (id) {
-            
-            //roleController(/*option*/).getAll(/*id*/) из роута
-            
-        }
-            
-    }
+            getAll: function () {
+
+                    return roleModel.getAll();
+
+            },
+
+            // getById: function (id) {
+            //
+            //     //roleController(/*option*/).getAll(/*id*/) из роута
+            //
+            // }
+
+        };
+
+    roleController.__proto__ = mainController.mainController;
+
+    return roleController;
     
 };

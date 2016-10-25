@@ -1,8 +1,8 @@
 module.exports = function(applicationInit, routeBundle) {
     
-    var customException = require(global.siteRootApp + 'services/customExceptionService.js');
+    var service = require(global.serviceContainer);
 
-    customException(!applicationInit.api, 'Пробросьте поддомен api');
+    service.get('global.customException')(!applicationInit.api, 'Пробросьте поддомен api');
 
     api = applicationInit.api;
 

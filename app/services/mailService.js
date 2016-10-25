@@ -47,15 +47,17 @@ module.exports = function (to, subject, html, from) {
 
         if (!!to) {
 
-            //console.log(from, to, subject, html);
             mailTransport.sendMail({
                 from: from,
                 to: to,
                 subject: subject,
                 html: html,
                 generateTextFromHtml: true
+                
             }, function(error) {
-                if(error) console.error(`Невозможно отправить письмо: ${error}`);
+                
+                if (error) console.error(`Невозможно отправить письмо: ${error}`);
+                
             });
 
         } else {

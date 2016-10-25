@@ -1,4 +1,6 @@
-var registryUserModel = require('../models/registryUserModel.js');
+var
+    registryUserModel = require('../models/registryUserModel.js'),
+    mainController = require(global.siteRootMainController)();
 
 /**
  * 
@@ -8,14 +10,19 @@ var registryUserModel = require('../models/registryUserModel.js');
 
 module.exports = function(options) {
     
-    return {
+    var registryUserController =
+        {
 
-        newUser: function (data) {
+            add: function (data) {
 
-                return registryUserModel.newUser(data);
-            
-        }
-            
-    }
+                    return registryUserModel.add(data);
+
+            }
+
+        };
+
+    registryUserController.__proto__ = mainController.mainController;
+
+    return registryUserController;
     
 };

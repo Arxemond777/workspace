@@ -8,7 +8,7 @@ module.exports = (errorMessage, status = 500) => {
 
   return {
       status: status,
-      error: errorMessage
+      message: errorMessage
   }
 
 };
